@@ -1,0 +1,13 @@
+rails new TwitterClone && cd TwitterClone
+git init
+git add .
+git commit -m “rails new TwitterClone”
+
+group :production do
+  gem 'pg'
+end
+
+gem 'haml-rails'
+gem 'bootstrap-sass', '~> 3.0.3.0'
+
+rails g scaffold Tweet body:text author_name:string author_email:string

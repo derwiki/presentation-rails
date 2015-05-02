@@ -1,0 +1,279 @@
+<!doctype html>
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %title Using git effectively | Adam Derewecki
+    %meta{:content => "Adam Derewecki", :name => "author"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "reveal/css/reset.css", :rel => "stylesheet"}/
+    %link{:href => "reveal/css/main.css", :rel => "stylesheet"}/
+    %link{:href => "highlight/src/styles/solarized_dark.css", :rel => "stylesheet"}/
+    %link{:href => "presentation.css", :rel => "stylesheet"}/
+  %body#presentation
+    .reveal
+      .slides
+
+        %section
+          %h2
+            Ruby on Rails: the good parts
+          %h4
+            .live
+              Live:
+              %a{ href: 'is.gd/derwiki_git' }
+                is.gd/derwiki_rails
+            .source
+              Source:
+              %a{ href: '//github.com/derwiki/presentation-git' }
+                github.com/derwiki/presentation-rails
+          %br
+          %h5 presented by
+          %h4 @derwiki
+          %h4
+          %h4 for AdRoll, May 5, 2015
+
+        %section
+          %h3
+            What is Ruby?
+          %ul
+            %li.fragment
+              A dynamic, object-oriented programming language developed in the
+              mid-90's
+            %li.fragment
+              Designed for programmer productivity and fun
+            %li.fragment
+              %div{ style: 'font-size: 26px; font-style: italic;' }
+                Often people, especially computer engineers, focus on the machines. They think, "By doing this, the machine will run fast. By doing this, the machine will run more effectively. By doing this, the machine will something something something." They are focusing on machines. But in fact we need to focus on humans, on how humans care about doing programming or operating the application of the machines. We are the masters. They are the slaves.
+              %div - Yukihiro Matsumoto, the creator of Ruby
+
+        %section
+          %h3 What is Rails?
+          %ul
+            %li.fragment
+              Full-stack framework written in Ruby
+            %li.fragment
+              Shipped with OS X since 2007
+            %li.fragment
+              Emphasizes the use of well-known software engineering patterns
+              and paradigms:
+            %li.fragment
+              Convention over configuration
+            %li.fragment
+              Don't repeat yourself (DRY)
+            %li.fragment
+              Active record pattern
+            %li.fragment
+              Model–View–Controller (MVC)
+            %li.fragment
+              Representational state transfer (REST)
+            %li.fragment
+              \... and more
+
+        %section
+          %h3 Why Rails?
+          %ul
+            %li.fragment
+              Like Ruby, optimized for developer productivity
+            %li.fragment
+              Which is why I
+              %i roll my eyes
+              when people complain that it's slow
+            %li.fragment
+              CPU and memory is getting faster and cheaper,
+              developers are already
+              %i much
+              more expensive and getting more expensive
+
+        %section
+          %h3 Optimized... how?
+          %ul
+            %li.fragment
+              Convention over configuration: once you learn "the Rails way",
+              you know where everything is supposed to be and what the file
+              is named -- cross project
+            %li.fragment
+              Robust CLI tool for rote development chores
+            %li.fragment
+              Once you learn this tool and the time savings it buys you,
+              you start thinking how you can translate your feature
+            %li.fragment
+              ActiveRecord is a mature feature that provides a predictable and
+              terse way to query the database
+            %li.fragment
+              Incorporates many best practices out-of-the-box
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+              At RailsConf 2015, DHH (Rails creator) likened Rails to a
+              survival kit for the Zombie apocolypse
+            %li.fragment
+              A little bit of everything, B/B+ quality -- use what you need
+            %li.fragment
+
+        %section
+          %h3.ms rails new MyProject
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h3 Survival Kit
+          %ul
+            %li.fragment
+            %li.fragment
+            %li.fragment
+
+        %section
+          %h2
+            Using
+            %span.ms git
+            effectively
+          %h4
+            .live
+              Live:
+              %a{ href: 'is.gd/derwiki_git' }
+                is.gd/derwiki_git
+            .source
+              Source:
+              %a{ href: '//github.com/derwiki/presentation-git' }
+                github.com/derwiki/presentation-git
+          %br
+          %h5 presented by
+          %h4 @derwiki
+          %h4
+          %h4 for AdRoll, March 31, 2015
+
+      /
+        required for correct operation of reveal.js,
+        even if we don't want controls
+      %aside.controls
+        %a.left{:href => "#"} &#x25c4;
+        %a.right{:href => "#"} &#x25ba;
+        %a.up{:href => "#"} &#x25b2;
+        %a.down{:href => "#"} &#x25bc;
+
+    %script{:src => "reveal/js/reveal.min.js"}
+    %script{:src => "highlight/build/highlight.pack.js"}
+    :javascript
+      Reveal.initialize({
+        controls: false,
+        progress: false,
+        history: true,
+        mouseWheel: false,
+        rollingLinks: false,
+      });
+      hljs.initHighlightingOnLoad();

@@ -1,0 +1,32 @@
+Rails: The Good Parts
+
+- RailsConf DHH called it a survival kit for the zombie apocalypse
+
+- rails new MyProject
+ - directory structure
+
+- rails cli
+ - rails generators
+  - scaffolds
+   - can write an 80% implementation of Twitter with just a generator
+
+- Gemfile
+ - ease of installation to pull in "all the goodies"
+ - basic setup of a rails project in < 30 minutes
+ - build IsMinnaShadyToday.herokuapp.com
+- rvm/rbenv
+
+- activerecord
+ - relationships between models
+ - terse syntax
+ - composable scopes
+
+- asset pipeline
+
+- database migrations
+
+- russian doll template caching
+- action, page caching
+ - show NewRelic percentile response rates for CameraLends
+
+- ? rspec
