@@ -615,12 +615,26 @@
           <img class='stretch' src='assets/heroku-scheduler.jpg' />
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
+          <h3>line_chart gem</h3>
+          <div class='fragment sm'>
+            <div class='ms'>timedata = {}</div>
+            <div class='ms'>@snapshots = Snapshot.order('id DESC').to_a.each do |ps|</div>
+            <div class='ms'>&nbsp;  key = ps.created_at.strftime('%Y%m%d')</div>
+            <div class='ms'>&nbsp;  timedata[key] ||= []</div>
+            <div class='ms'>&nbsp;  timedata[key] &lt;&lt; ps.visual_complete</div>
+            <div class='ms'>end</div>
+            <br />
+            <div class='ms'>@chart = []</div>
+            <div class='ms'>timedata.each do |hour_time_key, values|</div>
+            <div class='ms'>&nbsp;  average = values.inject(:+).to_f / values.size</div>
+            <div class='ms'>&nbsp;  @chart &lt;&lt; [Time.parse(hour_time_key), average]</div>
+            <div class='ms'>end</div>
+            <div class='ms'>= line_chart [{ name: 'Visually Complete', data: @chart }]</div>
+          </div>
+        </section>
+        <section>
+          <h3 class='ms'>line_chart gem</h3>
+          <img class='stretch' src='assets/snapshots-chart.jpg' />
         </section>
         <section>
           <h3>Survival Kit</h3>

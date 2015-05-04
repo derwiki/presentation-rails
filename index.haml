@@ -552,11 +552,25 @@
           %img.stretch{ src: 'assets/heroku-scheduler.jpg' }
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 line_chart gem
+          .fragment.sm
+            .ms timedata = {}
+            .ms @snapshots = Snapshot.order('id DESC').to_a.each do |ps|
+            .ms &nbsp;  key = ps.created_at.strftime('%Y%m%d')
+            .ms &nbsp;  timedata[key] ||= []
+            .ms &nbsp;  timedata[key] &lt;&lt; ps.visual_complete
+            .ms end
+            %br
+            .ms @chart = []
+            .ms timedata.each do |hour_time_key, values|
+            .ms &nbsp;  average = values.inject(:+).to_f / values.size
+            .ms &nbsp;  @chart &lt;&lt; [Time.parse(hour_time_key), average]
+            .ms end
+            .ms = line_chart [{ name: 'Visually Complete', data: @chart }]
+
+        %section
+          %h3.ms line_chart gem
+          %img.stretch{ src: 'assets/snapshots-chart.jpg' }
 
         %section
           %h3 Survival Kit
