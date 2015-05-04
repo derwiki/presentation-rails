@@ -311,6 +311,77 @@
           </div>
         </section>
         <section>
+          <h3 class='ms'>config/routes.rb</h3>
+          <div class='fragment'>
+            <div class='ms'>Rails.application.routes.draw do</div>
+            <div class='ms'>&nbsp; resources :snapshots</div>
+            <div class='ms'>&nbsp; root: 'snapshots#index'</div>
+            <div class='ms'>end</div>
+          </div>
+        </section>
+        <section>
+          <h3>Routing</h3>
+          <div class='fragment'>
+            <div class='ms b'>$ rake routes</div>
+            <table class='sm'>
+              <tr>
+                <td>Prefix</td>
+                <td>Verb</td>
+                <td>URI Pattern</td>
+                <td>Controller#Action</td>
+              </tr>
+              <tr>
+                <td>snapshots</td>
+                <td>GET</td>
+                <td>/snapshots(.:format)</td>
+                <td>snapshots#index</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>POST</td>
+                <td>/snapshots(.:format)</td>
+                <td>snapshots#create</td>
+              </tr>
+              <tr>
+                <td>new_snapshot</td>
+                <td>GET</td>
+                <td>/snapshots/new(.:format)</td>
+                <td>snapshots#new</td>
+              </tr>
+              <tr>
+                <td>edit_snapshot</td>
+                <td>GET</td>
+                <td>/snapshots/:id/edit(.:format)</td>
+                <td>snapshots#edit</td>
+              </tr>
+              <tr>
+                <td>snapshot</td>
+                <td>GET</td>
+                <td>/snapshots/:id(.:format)</td>
+                <td>snapshots#show</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>PATCH</td>
+                <td>/snapshots/:id(.:format)</td>
+                <td>snapshots#update</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>PUT</td>
+                <td>/snapshots/:id(.:format)</td>
+                <td>snapshots#update</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>DELETE</td>
+                <td>/snapshots/:id(.:format)</td>
+                <td>snapshots#destroy</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+        <section>
           <h3>Controller</h3>
           <div class='fragment sm'>
             <div class='ms'>class SnapshotsController &lt; ApplicationController</div>

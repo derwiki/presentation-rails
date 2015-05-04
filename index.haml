@@ -262,6 +262,64 @@
             .ms 2.2.0 :002 &gt; Snapshot
             .ms &nbsp; =&gt; Snapshot(id: integer, requests: integer, visual_complete: integer, created_at: datetime, updated_at: datetime)
 
+        %section
+          %h3.ms config/routes.rb
+          .fragment
+            .ms Rails.application.routes.draw do
+            .ms &nbsp; resources :snapshots
+            .ms &nbsp; root: 'snapshots#index'
+            .ms end
+
+        %section
+          %h3 Routing
+          .fragment
+            .ms.b $ rake routes
+            %table.sm
+              %tr
+                %td Prefix
+                %td Verb
+                %td URI Pattern
+                %td Controller#Action
+              %tr
+                %td snapshots
+                %td GET
+                %td /snapshots(.:format)
+                %td snapshots#index
+              %tr
+                %td
+                %td POST
+                %td /snapshots(.:format)
+                %td snapshots#create
+              %tr
+                %td new_snapshot
+                %td GET
+                %td /snapshots/new(.:format)
+                %td snapshots#new
+              %tr
+                %td edit_snapshot
+                %td GET
+                %td /snapshots/:id/edit(.:format)
+                %td snapshots#edit
+              %tr
+                %td snapshot
+                %td GET
+                %td /snapshots/:id(.:format)
+                %td snapshots#show
+              %tr
+                %td
+                %td PATCH
+                %td /snapshots/:id(.:format)
+                %td snapshots#update
+              %tr
+                %td
+                %td PUT
+                %td /snapshots/:id(.:format)
+                %td snapshots#update
+              %tr
+                %td
+                %td DELETE
+                %td /snapshots/:id(.:format)
+                %td snapshots#destroy
 
         %section
           %h3 Controller
