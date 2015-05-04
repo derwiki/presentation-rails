@@ -262,6 +262,84 @@
             .ms 2.2.0 :002 &gt; Snapshot
             .ms &nbsp; =&gt; Snapshot(id: integer, requests: integer, visual_complete: integer, created_at: datetime, updated_at: datetime)
 
+
+        %section
+          %h3 Controller
+          .fragment.sm
+            .ms class SnapshotsController &lt; ApplicationController
+            .ms   before_action :set_snapshot, only: %i[show edit update destroy]
+            %br
+            .ms   def index # GET /snapshots
+            .ms     @snapshots = Snapshot.all
+            .ms   end
+            %br
+            .ms   def show # GET /snapshots/1
+            .ms   end
+            %br
+            .ms   def new # GET /snapshots/new
+            .ms     @snapshot = Snapshot.new
+            .ms   end
+            %br
+            .ms   def edit # GET /snapshots/1/edit
+            .ms   end
+
+        %section
+          %h3 Controller
+          .fragment.sm
+            .ms def create # POST /snapshots
+            .ms &nbsp;  @snapshot = Snapshot.new(snapshot_params)
+            %br
+            .ms &nbsp; respond_to do |format|
+            .ms &nbsp; &nbsp; if @snapshot.save
+            .ms &nbsp; &nbsp; &nbsp; format.html { redirect_to @snapshot, notice: 'Snapshot was successfully created.' }
+            .ms &nbsp; &nbsp; &nbsp; format.json { render :show, status: :created, location: @snapshot }
+            .ms &nbsp; &nbsp; else
+            .ms &nbsp; &nbsp; &nbsp; format.html { render :new }
+            .ms &nbsp; &nbsp; &nbsp; format.json { render json: @snapshot.errors }
+            .ms &nbsp; &nbsp; end
+            .ms &nbsp; end
+            .ms end
+
+        %section
+          %h3 Controller
+          .fragment.sm
+            .ms def update # PATCH/PUT /snapshots/1
+            .ms &nbsp; respond_to do |format|
+            .ms &nbsp; &nbsp; if @snapshot.update(snapshot_params)
+            .ms &nbsp; &nbsp; &nbsp; format.html { redirect_to @snapshot, notice: 'Snapshot was successfully updated.' }
+            .ms &nbsp; &nbsp; &nbsp; format.json { render :show, status: :ok, location: @snapshot }
+            .ms &nbsp; &nbsp; else
+            .ms &nbsp; &nbsp; &nbsp; format.html { render :edit }
+            .ms &nbsp; &nbsp; &nbsp; format.json { render json: @snapshot.errors, status: :unprocessable_entity }
+            .ms &nbsp; &nbsp; end
+            .ms &nbsp; end
+            .ms end
+
+        %section
+          %h3 Controller
+          .fragment.sm
+            .ms &nbsp; def destroy # DELETE /snapshots/1
+            .ms &nbsp; &nbsp; @snapshot.destroy
+            .ms &nbsp; &nbsp; respond_to do |format|
+            .ms &nbsp; &nbsp; &nbsp; format.html { redirect_to snapshots_url, notice: 'Snapshot was successfully destroyed.' }
+            .ms &nbsp; &nbsp; &nbsp; format.json { head :no_content }
+            .ms &nbsp; &nbsp; end
+            .ms &nbsp; end
+
+        %section
+          %h3 Controller
+          .fragment.sm
+            .ms &nbsp; private
+            .ms &nbsp; &nbsp; # Use callbacks to share common setup or constraints between actions.
+            .ms &nbsp; &nbsp; def set_snapshot
+            .ms &nbsp; &nbsp; &nbsp; @snapshot = Snapshot.find(params[:id])
+            .ms &nbsp; &nbsp; end
+            %br
+            .ms &nbsp; &nbsp; # Never trust parameters from the scary internet, only allow the white list through.
+            .ms &nbsp; &nbsp; def snapshot_params
+            .ms &nbsp; &nbsp; &nbsp; params.require(:snapshot).permit(:requests, :visual_complete)
+            .ms &nbsp; &nbsp; end
+
         %section
           %h3 Start the server
           .fragment
@@ -302,18 +380,109 @@
           %img.stretch{ src: 'assets/snapshots-index-2.jpg' }
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 Cron job
+          .fragment
+            .ms.b $ rails g task web_page_test run
+            .ms &nbsp; &nbsp; &nbsp;create &nbsp;lib/tasks/web_page_test.rake
+            .ms.b $ cat lib/tasks/web_page_test.rake
+            .ms namespace :web_page_test do
+            .ms &nbsp; desc "TODO"
+            .ms &nbsp; task run: :environment do
+            .ms &nbsp; end
+            .ms end
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 Rake task
+          .fragment
+            .ms require 'web_page_test'
+            %br
+            .ms namespace :web_page_test do
+            .ms &nbsp; desc "Run performance test"
+            .ms &nbsp; task run: :environment do
+            .ms &nbsp; &nbsp; requests, visual_complete =
+            .ms &nbsp; &nbsp; &nbsp; WebPageTest.test('http://example.com')
+            .ms &nbsp; &nbsp; PerfMon.create! requests: requests,
+            .ms &nbsp; &nbsp; &nbsp; visual_complete: visual_complete
+            .ms &nbsp; end
+            .ms end
+
+        %section
+          %h3 Heroku
+          .fragment.sm
+            .ms.b $ heroku create perf-mon-example
+            .ms Creating perf-mon-example... done, stack is cedar-14
+            .ms https://perf-mon-example.herokuapp.com/ | https://git.heroku.com/perf-mon-example.git
+            .ms Git remote heroku added
+            .ms.b $ git remote -v
+            .ms heroku  https://git.heroku.com/perf-mon-example.git (fetch)
+            .ms heroku  https://git.heroku.com/perf-mon-example.git (push)
+
+        %section
+          %h3 Pushing to Heroku
+          .fragment.sm
+            .ms $ git push heroku master
+            .ms Counting objects: 90, done.
+            .ms Delta compression using up to 4 threads.
+            .ms Compressing objects: 100% (82/82), done.
+            .ms Writing objects: 100% (90/90), 20.87 KiB | 0 bytes/s, done.
+            .ms Total 90 (delta 5), reused 0 (delta 0)
+            .ms remote: Compressing source files... done.
+            .ms remote: Building source:
+            .ms remote:
+            .ms remote: -----> Ruby app detected
+            .ms remote: -----> Compiling Ruby/Rails
+            .ms remote: -----> Using Ruby version: ruby-2.0.0
+            .ms remote: -----> Installing dependencies using 1.7.12
+
+        %section
+          %h3 Pushing to Heroku
+          .fragment.sm
+            .ms remote:        Running: bundle install --without development:test
+            .ms remote:        Installing rails 4.2.0
+            .ms remote:        Your bundle is complete!
+            .ms remote:        Bundle completed (29.25s)
+            .ms remote:        Cleaning up the bundler cache.
+            .ms remote: -----> Preparing app for Rails asset pipeline
+            .ms remote:        Running: rake assets:precompile
+            .ms remote:        Writing /tmp/build_62ee/public/assets/application-b598aa7.js
+            .ms remote:        Writing /tmp/build_62ee/public/assets/application-0723cb9.css
+            .ms remote:        Asset precompilation completed (7.66s)
+            .ms remote:        Cleaning assets
+            .ms remote:        Running: rake assets:clean
+
+        %section
+          %h3 Pushing to Heroku
+          .fragment.sm
+            .ms remote: -----> Discovering process types
+            .ms remote:        Procfile declares types -> (none)
+            .ms remote:        Default types for Ruby  -> console, rake, web, worker
+            .ms remote:
+            .ms remote: -----> Compressing... done, 28.8MB
+            .ms remote: -----> Launching... done, v6
+            .ms remote:        https://perf-mon-example.herokuapp.com/ deployed to Heroku
+            .ms remote:
+            .ms remote: Verifying deploy... done.
+            .ms To https://git.heroku.com/perf-mon-example.git
+            .ms  * [new branch]      master -> master
+
+        %section
+          %h3 Setting up scheduler
+          .fragment.sm
+            .ms.b $ heroku addons:add scheduler
+            .ms Adding scheduler on perf-mon-example... done, v6 (free)
+            .ms This add-on consumes dyno hours, which could impact your monthly bill. To learn more:
+            .ms http://devcenter.heroku.com/addons_with_dyno_hour_usage
+            %br
+            .ms To manage scheduled jobs run:
+            .ms heroku addons:open scheduler
+            .ms Use `heroku addons:docs scheduler` to view documentation.
+            %br
+            .ms.b $ heroku addons:open scheduler
+            .ms Opening scheduler:standard for perf-mon-example... done
+
+        %section
+          %h3.ms /snapshots (index)
+          %img.stretch{ src: 'assets/heroku-scheduler.jpg' }
 
         %section
           %h3 Survival Kit

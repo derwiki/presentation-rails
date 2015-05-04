@@ -311,6 +311,88 @@
           </div>
         </section>
         <section>
+          <h3>Controller</h3>
+          <div class='fragment sm'>
+            <div class='ms'>class SnapshotsController &lt; ApplicationController</div>
+            <div class='ms'>before_action :set_snapshot, only: %i[show edit update destroy]</div>
+            <br />
+            <div class='ms'>def index # GET /snapshots</div>
+            <div class='ms'>@snapshots = Snapshot.all</div>
+            <div class='ms'>end</div>
+            <br />
+            <div class='ms'>def show # GET /snapshots/1</div>
+            <div class='ms'>end</div>
+            <br />
+            <div class='ms'>def new # GET /snapshots/new</div>
+            <div class='ms'>@snapshot = Snapshot.new</div>
+            <div class='ms'>end</div>
+            <br />
+            <div class='ms'>def edit # GET /snapshots/1/edit</div>
+            <div class='ms'>end</div>
+          </div>
+        </section>
+        <section>
+          <h3>Controller</h3>
+          <div class='fragment sm'>
+            <div class='ms'>def create # POST /snapshots</div>
+            <div class='ms'>&nbsp;  @snapshot = Snapshot.new(snapshot_params)</div>
+            <br />
+            <div class='ms'>&nbsp; respond_to do |format|</div>
+            <div class='ms'>&nbsp; &nbsp; if @snapshot.save</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.html { redirect_to @snapshot, notice: 'Snapshot was successfully created.' }</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.json { render :show, status: :created, location: @snapshot }</div>
+            <div class='ms'>&nbsp; &nbsp; else</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.html { render :new }</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.json { render json: @snapshot.errors }</div>
+            <div class='ms'>&nbsp; &nbsp; end</div>
+            <div class='ms'>&nbsp; end</div>
+            <div class='ms'>end</div>
+          </div>
+        </section>
+        <section>
+          <h3>Controller</h3>
+          <div class='fragment sm'>
+            <div class='ms'>def update # PATCH/PUT /snapshots/1</div>
+            <div class='ms'>&nbsp; respond_to do |format|</div>
+            <div class='ms'>&nbsp; &nbsp; if @snapshot.update(snapshot_params)</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.html { redirect_to @snapshot, notice: 'Snapshot was successfully updated.' }</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.json { render :show, status: :ok, location: @snapshot }</div>
+            <div class='ms'>&nbsp; &nbsp; else</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.html { render :edit }</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.json { render json: @snapshot.errors, status: :unprocessable_entity }</div>
+            <div class='ms'>&nbsp; &nbsp; end</div>
+            <div class='ms'>&nbsp; end</div>
+            <div class='ms'>end</div>
+          </div>
+        </section>
+        <section>
+          <h3>Controller</h3>
+          <div class='fragment sm'>
+            <div class='ms'>&nbsp; def destroy # DELETE /snapshots/1</div>
+            <div class='ms'>&nbsp; &nbsp; @snapshot.destroy</div>
+            <div class='ms'>&nbsp; &nbsp; respond_to do |format|</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.html { redirect_to snapshots_url, notice: 'Snapshot was successfully destroyed.' }</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; format.json { head :no_content }</div>
+            <div class='ms'>&nbsp; &nbsp; end</div>
+            <div class='ms'>&nbsp; end</div>
+          </div>
+        </section>
+        <section>
+          <h3>Controller</h3>
+          <div class='fragment sm'>
+            <div class='ms'>&nbsp; private</div>
+            <div class='ms'>&nbsp; &nbsp; # Use callbacks to share common setup or constraints between actions.</div>
+            <div class='ms'>&nbsp; &nbsp; def set_snapshot</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; @snapshot = Snapshot.find(params[:id])</div>
+            <div class='ms'>&nbsp; &nbsp; end</div>
+            <br />
+            <div class='ms'>&nbsp; &nbsp; # Never trust parameters from the scary internet, only allow the white list through.</div>
+            <div class='ms'>&nbsp; &nbsp; def snapshot_params</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; params.require(:snapshot).permit(:requests, :visual_complete)</div>
+            <div class='ms'>&nbsp; &nbsp; end</div>
+          </div>
+        </section>
+        <section>
           <h3>Start the server</h3>
           <div class='fragment'>
             <div class='ms b'>$ rails s -p 3003</div>
@@ -341,20 +423,128 @@
           <img class='stretch' src='assets/snapshots-index.jpg' />
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
+          <h3 class='ms'>/snapshots (new)</h3>
+          <img class='stretch' src='assets/snapshots-new.jpg' />
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
+          <h3 class='ms'>/snapshots (show)</h3>
+          <img class='stretch' src='assets/snapshots-show.jpg' />
+        </section>
+        <section>
+          <h3 class='ms'>/snapshots (index)</h3>
+          <img class='stretch' src='assets/snapshots-index-2.jpg' />
+        </section>
+        <section>
+          <h3>Cron job</h3>
+          <div class='fragment'>
+            <div class='ms b'>$ rails g task web_page_test run</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp;create &nbsp;lib/tasks/web_page_test.rake</div>
+            <div class='ms b'>$ cat lib/tasks/web_page_test.rake</div>
+            <div class='ms'>namespace :web_page_test do</div>
+            <div class='ms'>&nbsp; desc "TODO"</div>
+            <div class='ms'>&nbsp; task run: :environment do</div>
+            <div class='ms'>&nbsp; end</div>
+            <div class='ms'>end</div>
+          </div>
+        </section>
+        <section>
+          <h3>Rake task</h3>
+          <div class='fragment'>
+            <div class='ms'>require 'web_page_test'</div>
+            <br />
+            <div class='ms'>namespace :web_page_test do</div>
+            <div class='ms'>&nbsp; desc "Run performance test"</div>
+            <div class='ms'>&nbsp; task run: :environment do</div>
+            <div class='ms'>&nbsp; &nbsp; requests, visual_complete =</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; WebPageTest.test('http://example.com')</div>
+            <div class='ms'>&nbsp; &nbsp; PerfMon.create! requests: requests,</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; visual_complete: visual_complete</div>
+            <div class='ms'>&nbsp; end</div>
+            <div class='ms'>end</div>
+          </div>
+        </section>
+        <section>
+          <h3>Heroku</h3>
+          <div class='fragment sm'>
+            <div class='ms b'>$ heroku create perf-mon-example</div>
+            <div class='ms'>Creating perf-mon-example... done, stack is cedar-14</div>
+            <div class='ms'>https://perf-mon-example.herokuapp.com/ | https://git.heroku.com/perf-mon-example.git</div>
+            <div class='ms'>Git remote heroku added</div>
+            <div class='ms b'>$ git remote -v</div>
+            <div class='ms'>heroku  https://git.heroku.com/perf-mon-example.git (fetch)</div>
+            <div class='ms'>heroku  https://git.heroku.com/perf-mon-example.git (push)</div>
+          </div>
+        </section>
+        <section>
+          <h3>Pushing to Heroku</h3>
+          <div class='fragment sm'>
+            <div class='ms'>$ git push heroku master</div>
+            <div class='ms'>Counting objects: 90, done.</div>
+            <div class='ms'>Delta compression using up to 4 threads.</div>
+            <div class='ms'>Compressing objects: 100% (82/82), done.</div>
+            <div class='ms'>Writing objects: 100% (90/90), 20.87 KiB | 0 bytes/s, done.</div>
+            <div class='ms'>Total 90 (delta 5), reused 0 (delta 0)</div>
+            <div class='ms'>remote: Compressing source files... done.</div>
+            <div class='ms'>remote: Building source:</div>
+            <div class='ms'>remote:</div>
+            <div class='ms'>remote: -----> Ruby app detected</div>
+            <div class='ms'>remote: -----> Compiling Ruby/Rails</div>
+            <div class='ms'>remote: -----> Using Ruby version: ruby-2.0.0</div>
+            <div class='ms'>remote: -----> Installing dependencies using 1.7.12</div>
+          </div>
+        </section>
+        <section>
+          <h3>Pushing to Heroku</h3>
+          <div class='fragment sm'>
+            <div class='ms'>remote:        Running: bundle install --without development:test</div>
+            <div class='ms'>remote:        Installing rails 4.2.0</div>
+            <div class='ms'>remote:        Your bundle is complete!</div>
+            <div class='ms'>remote:        Bundle completed (29.25s)</div>
+            <div class='ms'>remote:        Cleaning up the bundler cache.</div>
+            <div class='ms'>remote: -----> Preparing app for Rails asset pipeline</div>
+            <div class='ms'>remote:        Running: rake assets:precompile</div>
+            <div class='ms'>remote:        Writing /tmp/build_62ee/public/assets/application-b598aa7.js</div>
+            <div class='ms'>remote:        Writing /tmp/build_62ee/public/assets/application-0723cb9.css</div>
+            <div class='ms'>remote:        Asset precompilation completed (7.66s)</div>
+            <div class='ms'>remote:        Cleaning assets</div>
+            <div class='ms'>remote:        Running: rake assets:clean</div>
+          </div>
+        </section>
+        <section>
+          <h3>Pushing to Heroku</h3>
+          <div class='fragment sm'>
+            <div class='ms'>remote: -----> Discovering process types</div>
+            <div class='ms'>remote:        Procfile declares types -> (none)</div>
+            <div class='ms'>remote:        Default types for Ruby  -> console, rake, web, worker</div>
+            <div class='ms'>remote:</div>
+            <div class='ms'>remote: -----> Compressing... done, 28.8MB</div>
+            <div class='ms'>remote: -----> Launching... done, v6</div>
+            <div class='ms'>remote:        https://perf-mon-example.herokuapp.com/ deployed to Heroku</div>
+            <div class='ms'>remote:</div>
+            <div class='ms'>remote: Verifying deploy... done.</div>
+            <div class='ms'>To https://git.heroku.com/perf-mon-example.git</div>
+            <div class='ms'>* [new branch]      master -> master</div>
+          </div>
+        </section>
+        <section>
+          <h3>Setting up scheduler</h3>
+          <div class='fragment sm'>
+            <div class='ms b'>$ heroku addons:add scheduler</div>
+            <div class='ms'>Adding scheduler on perf-mon-example... done, v6 (free)</div>
+            <div class='ms'>This add-on consumes dyno hours, which could impact your monthly bill. To learn more:</div>
+            <div class='ms'>http://devcenter.heroku.com/addons_with_dyno_hour_usage</div>
+            <br />
+            <div class='ms'>To manage scheduled jobs run:</div>
+            <div class='ms'>heroku addons:open scheduler</div>
+            <div class='ms'>Use `heroku addons:docs scheduler` to view documentation.</div>
+            <br />
+            <div class='ms b'>$ heroku addons:open scheduler</div>
+            <div class='ms'>Opening scheduler:standard for perf-mon-example... done</div>
+          </div>
+        </section>
+        <section>
+          <h3 class='ms'>/snapshots (index)</h3>
+          <img class='stretch' src='assets/heroku-scheduler.jpg' />
         </section>
         <section>
           <h3>Survival Kit</h3>

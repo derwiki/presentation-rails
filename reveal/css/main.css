@@ -964,3 +964,7 @@ body {
 .stretch {
   width: 100%;
 }
+
+.sm {
+  font-size: 26px;
+}
