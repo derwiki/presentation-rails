@@ -957,6 +957,12 @@ body {
   column-count: 2;
 }
 
+.four-column {
+  -webkit-column-count: 4;
+  -moz-column-count: 4;
+  column-count: 4;
+}
+
 .b {
   font-weight: bold;
 }
