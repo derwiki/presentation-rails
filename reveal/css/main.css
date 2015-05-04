@@ -951,6 +951,10 @@ body {
 	background: rgba( 0, 0, 0, 0.6 );
 }
 
-
+.two-column {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+}
 
 

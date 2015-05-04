@@ -91,7 +91,7 @@
           </ul>
         </section>
         <section>
-          <h3>Why Rails? Productivity.</h3>
+          <h3>Why Rails?</h3>
           <ul>
             <li class='fragment'>
               Like Ruby, optimized for developer productivity
@@ -103,74 +103,173 @@
             </li>
             <li class='fragment'>
               CPU and memory is getting faster and cheaper,
-              developers are much more expensive and getting more expensive
+              developers are already
+              <i>much</i>
+              more expensive and getting more expensive
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Optimized... how?</h3>
+          <ul>
+            <li class='fragment'>
+              Convention over configuration: once you learn "the Rails way",
+              you know where everything is supposed to be and what the file
+              is named -- cross project
+            </li>
+            <li class='fragment'>
+              Robust CLI tool for rote development chores
+            </li>
+            <li class='fragment'>
+              Once you learn this tool and the time savings it buys you,
+              you start thinking how you can translate your feature
+            </li>
+            <li class='fragment'>
+              ActiveRecord is a mature feature that provides a predictable and
+              terse way to query the database
+            </li>
+            <li class='fragment'>
+              Incorporates many best practices out-of-the-box
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Survival Kit</h3>
+          <ul>
+            <li class='fragment'>
+              At RailsConf 2015, DHH (Rails creator) likened Rails to a
+              survival kit for the Zombie apocolypse
+            </li>
+            <li class='fragment'>
+              A little bit of everything, B/B+ quality -- use what you need
             </li>
             <li class='fragment'></li>
           </ul>
         </section>
         <section>
-          <h3>Survival Kit</h3>
+          <h3 class='ms'>rails new PerfMon</h3>
           <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
+            <li class='fragment'>
+              Helper that sets up a new project skeleton
+            </li>
           </ul>
+          <div class='fragment two-column'>
+            <div class='ms'>Gemfile</div>
+            <div class='ms'>Gemfile.lock</div>
+            <div class='ms'>README.rdoc</div>
+            <div class='ms'>config.ru</div>
+            <div class='ms'>Rakefile</div>
+            <div class='ms'>app/</div>
+            <div class='ms'>bin/</div>
+            <div class='ms'>config/</div>
+            <div class='ms'>db/</div>
+            <div class='ms'>lib/</div>
+            <div class='ms'>log/</div>
+            <div class='ms'>public/</div>
+            <div class='ms'>test/</div>
+            <div class='ms'>tmp/</div>
+            <div class='ms'>vendor/</div>
+          </div>
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
+          <h3>Gemfile</h3>
+          <div class='fragment'>
+            <div class='ms'>source 'https://rubygems.org'</div>
+            <div class='ms'>gem 'rails', '4.2.0'</div>
+            <div class='ms'>gem 'sqlite3'</div>
+            <div class='ms'>gem 'sass-rails', '~> 5.0'</div>
+            <div class='ms'>gem 'uglifier', '>= 1.3.0'</div>
+            <div class='ms'>gem 'coffee-rails', '~> 4.1.0'</div>
+            <div class='ms'>gem 'jquery-rails'</div>
+            <div class='ms'>gem 'turbolinks'</div>
+            <div class='ms'>gem 'jbuilder', '~> 2.0'</div>
+            <div class='ms'>group :development, :test do</div>
+            <div class='ms'>&nbsp; &nbsp; gem 'byebug'</div>
+            <div class='ms'>&nbsp; &nbsp; gem 'web-console', '~> 2.0'</div>
+            <div class='ms'>&nbsp; &nbsp; gem 'spring'</div>
+            <div class='ms'>end</div>
+          </div>
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
+          <h3 class='ms'>app/</h3>
+          <div class='fragment'>
+            <div class='ms'>app/models/</div>
+            <div class='ms'>app/controllers/application_controller.rb</div>
+            <div class='ms'>app/views/layouts/application.html.erb</div>
+            <div class='ms'>app/helpers/application_helper.rb</div>
+            <div class='ms'>app/mailers/</div>
+            <div class='ms'>app/assets/javascripts/application.js</div>
+            <div class='ms'>app/assets/stylesheets/application.css</div>
+            <div class='ms'>app/assets/images/</div>
+            <div class='ms'>app/controllers/concerns/</div>
+            <div class='ms'>app/models/concerns/</div>
+          </div>
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
+          <h3>
+            <span class='ms'>bin/</span>
+            and
+            <span class='ms'>config/</span>
+          </h3>
+          <div class='fragment'>
+            <div class='ms'>bin/bundle</div>
+            <div class='ms'>bin/rails</div>
+            <div class='ms'>bin/rake</div>
+            <div class='ms'>bin/setup</div>
+            <div class='ms'>config/application.rb</div>
+            <div class='ms'>config/routes.rb</div>
+            <div class='ms'>config/database.yml</div>
+            <div class='ms'>config/environment.rb</div>
+            <div class='ms'>config/environments/development.rb</div>
+            <div class='ms'>config/environments/production.rb</div>
+            <div class='ms'>config/environments/test.rb</div>
+            <div class='ms'>config/locales/en.yml</div>
+          </div>
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
+          <h3 class='ms'>config/initializers/</h3>
+          <div class='fragment'>
+            <div class='ms'>config/initializers/assets.rb</div>
+            <div class='ms'>config/initializers/backtrace_silencers.rb</div>
+            <div class='ms'>config/initializers/cookies_serializer.rb</div>
+            <div class='ms'>config/initializers/filter_parameter_logging.rb</div>
+            <div class='ms'>config/initializers/inflections.rb</div>
+            <div class='ms'>config/initializers/mime_types.rb</div>
+            <div class='ms'>config/initializers/session_store.rb</div>
+            <div class='ms'>config/initializers/wrap_parameters.rb</div>
+          </div>
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
-        </section>
-        <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
-        </section>
-        <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-          </ul>
+          <h3>
+            <span class='ms'>db/,</span>
+            <span class='ms'>lib/,</span>
+            <span class='ms'>log/,</span>
+            <span class='ms'>public/,</span>
+            <span class='ms'>test/,</span>
+            <span class='ms'>tmp/,</span>
+            and
+            <span class='ms'>vendor/</span>
+          </h3>
+          <div class='fragment two-column'>
+            <div class='ms'>db/seeds.rb</div>
+            <div class='ms'>lib/tasks/</div>
+            <div class='ms'>lib/assets/</div>
+            <div class='ms'>log/</div>
+            <div class='ms'>public/{404,422,500}.html</div>
+            <div class='ms'>public/favicon.ico</div>
+            <div class='ms'>public/robots.txt</div>
+            <div class='ms'>test/fixtures/</div>
+            <div class='ms'>test/controllers/</div>
+            <div class='ms'>test/mailers/</div>
+            <div class='ms'>test/models/</div>
+            <div class='ms'>test/helpers/</div>
+            <div class='ms'>test/integration/</div>
+            <div class='ms'>test/test_helper.rb</div>
+            <div class='ms'>tmp/cache/</div>
+            <div class='ms'>tmp/cache/assets/</div>
+            <div class='ms'>vendor/assets/javascripts/</div>
+            <div class='ms'>vendor/assets/stylesheets/</div>
+          </div>
         </section>
         <section>
           <h3>Survival Kit</h3>

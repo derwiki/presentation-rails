@@ -112,46 +112,119 @@
             %li.fragment
 
         %section
-          %h3.ms rails new MyProject
+          %h3.ms rails new PerfMon
           %ul
             %li.fragment
-            %li.fragment
-            %li.fragment
+              Helper that sets up a new project skeleton
+          .fragment.two-column
+            .ms Gemfile
+            .ms Gemfile.lock
+            .ms README.rdoc
+            .ms config.ru
+            .ms Rakefile
+            .ms app/
+            .ms bin/
+            .ms config/
+            .ms db/
+            .ms lib/
+            .ms log/
+            .ms public/
+            .ms test/
+            .ms tmp/
+            .ms vendor/
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 Gemfile
+          .fragment
+            .ms source 'https://rubygems.org'
+            .ms gem 'rails', '4.2.0'
+            .ms gem 'sqlite3'
+            .ms gem 'sass-rails', '~> 5.0'
+            .ms gem 'uglifier', '>= 1.3.0'
+            .ms gem 'coffee-rails', '~> 4.1.0'
+            .ms gem 'jquery-rails'
+            .ms gem 'turbolinks'
+            .ms gem 'jbuilder', '~> 2.0'
+            .ms group :development, :test do
+            .ms &nbsp; &nbsp; gem 'byebug'
+            .ms &nbsp; &nbsp; gem 'web-console', '~> 2.0'
+            .ms &nbsp; &nbsp; gem 'spring'
+            .ms end
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3.ms app/
+          .fragment
+            .ms app/models/
+            .ms app/controllers/application_controller.rb
+            .ms app/views/layouts/application.html.erb
+            .ms app/helpers/application_helper.rb
+            .ms app/mailers/
+            .ms app/assets/javascripts/application.js
+            .ms app/assets/stylesheets/application.css
+            .ms app/assets/images/
+            .ms app/controllers/concerns/
+            .ms app/models/concerns/
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3
+            %span.ms bin/
+            and
+            %span.ms config/
+          .fragment
+            .ms bin/bundle
+            .ms bin/rails
+            .ms bin/rake
+            .ms bin/setup
+            .ms config/application.rb
+            .ms config/routes.rb
+            .ms config/database.yml
+            .ms config/environment.rb
+            .ms config/environments/development.rb
+            .ms config/environments/production.rb
+            .ms config/environments/test.rb
+            .ms config/locales/en.yml
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3.ms config/initializers/
+          .fragment
+            .ms config/initializers/assets.rb
+            .ms config/initializers/backtrace_silencers.rb
+            .ms config/initializers/cookies_serializer.rb
+            .ms config/initializers/filter_parameter_logging.rb
+            .ms config/initializers/inflections.rb
+            .ms config/initializers/mime_types.rb
+            .ms config/initializers/session_store.rb
+            .ms config/initializers/wrap_parameters.rb
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3
+            %span.ms db/,
+            %span.ms lib/,
+            %span.ms log/,
+            %span.ms public/,
+            %span.ms test/,
+            %span.ms tmp/,
+            and
+            %span.ms vendor/
+          .fragment.two-column
+            .ms db/seeds.rb
+            .ms lib/tasks/
+            .ms lib/assets/
+            .ms log/
+            .ms public/{404,422,500}.html
+            .ms public/favicon.ico
+            .ms public/robots.txt
+            .ms test/fixtures/
+            .ms test/controllers/
+            .ms test/mailers/
+            .ms test/models/
+            .ms test/helpers/
+            .ms test/integration/
+            .ms test/test_helper.rb
+            .ms tmp/cache/
+            .ms tmp/cache/assets/
+            .ms vendor/assets/javascripts/
+            .ms vendor/assets/stylesheets/
 
         %section
           %h3 Survival Kit
