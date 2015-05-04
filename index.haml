@@ -227,32 +227,79 @@
             .ms vendor/assets/stylesheets/
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 $ rails g scaffold Snapshot
+          .fragment
+            .ms.b $ rails g scaffold Snapshot requests:integer visual_complete:integer
+            .ms db/migrate/20150504043737_create_snapshots.rb
+            .ms app/models/snapshot.rb
+            .ms test/models/snapshot_test.rb
+            .ms app/controllers/snapshots_controller.rb
+            .ms app/views/snapshots/
+            .ms &nbsp; &nbsp; {index edit show new _form}.html.haml
+            .ms test/controllers/snapshots_controller_test.rb
+            .ms app/helpers/snapshots_helper.rb
+            .ms app/assets/javascripts/snapshots.coffee
+            .ms app/assets/stylesheets/snapshots.scss
+            .ms app/assets/stylesheets/scaffolds.scss
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 Update the database
+          .fragment
+            .ms.b $ rake db:migrate
+            .ms == 20150504043737 CreateSnapshots: migrating ==================================
+            .ms -- create_table(:snapshots)
+            .ms &nbsp; -&gt; 0.0014s
+            .ms == 20150504043737 CreateSnapshots: migrated (0.0015s) =========================
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 Verifying the migration
+          .fragment
+            .ms.b $ rails c
+            .ms Loading development environment (Rails 4.2.0)
+            .ms 2.2.0 :001 &gt; Snapshot.all
+            .ms &nbsp; Snapshot Load (1.6ms)  SELECT "snapshots".* FROM "snapshots"
+            .ms =&gt; &lt;ActiveRecord::Relation []&gt;
+            .ms 2.2.0 :002 &gt; Snapshot
+            .ms &nbsp; =&gt; Snapshot(id: integer, requests: integer, visual_complete: integer, created_at: datetime, updated_at: datetime)
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 Start the server
+          .fragment
+            .ms.b $ rails s -p 3003
+            .ms =&gt; Booting WEBrick
+            .ms =&gt; Rails 4.2.0 application starting in development on http://localhost:3003
+            .ms =&gt; Run `rails server -h` for more startup options
+            .ms =&gt; Ctrl-C to shutdown server
+            .ms [2015-05-03 21:44:39] INFO  WEBrick 1.3.1
+            .ms [2015-05-03 21:44:39] INFO  ruby 2.2.0 (2014-12-25) [x86_64-darwin13]
+            .ms [2015-05-03 21:44:39] INFO  WEBrick::HTTPServer#start: pid=13475 port=3003
+
+        %section
+          %h3
+            Request
+            %span.ms /snapshots
+          .fragment
+            .ms Started GET "/snapshots" for ::1 at 2015-05-03 21:47:24 -0700
+            .ms Processing by SnapshotsController#index as HTML
+            .ms   Snapshot Load (0.1ms)  SELECT "snapshots".* FROM "snapshots"
+            .ms   Rendered snapshots/index.html.haml within layouts/application (3.7ms)
+            .ms Completed 200 OK in 1659ms (Views: 1655.5ms | ActiveRecord: 0.2ms)
+
+        %section
+          %h3.ms /snapshots (index)
+          %img.stretch{ src: 'assets/snapshots-index.jpg' }
+
+        %section
+          %h3.ms /snapshots (new)
+          %img.stretch{ src: 'assets/snapshots-new.jpg' }
+
+        %section
+          %h3.ms /snapshots (show)
+          %img.stretch{ src: 'assets/snapshots-show.jpg' }
+
+        %section
+          %h3.ms /snapshots (index)
+          %img.stretch{ src: 'assets/snapshots-index-2.jpg' }
 
         %section
           %h3 Survival Kit

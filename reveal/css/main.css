@@ -957,4 +957,10 @@ body {
   column-count: 2;
 }
 
+.b {
+  font-weight: bold;
+}
 
+.stretch {
+  width: 100%;
+}
