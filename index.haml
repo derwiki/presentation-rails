@@ -2,7 +2,7 @@
 %html{:lang => "en"}
   %head
     %meta{:charset => "utf-8"}/
-    %title Using git effectively | Adam Derewecki
+    %title Ruby on Rails: The Good Parts | Adam Derewecki
     %meta{:content => "Adam Derewecki", :name => "author"}/
     %link{:href => "http://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "reveal/css/reset.css", :rel => "stylesheet"}/
@@ -15,11 +15,11 @@
 
         %section
           %h2
-            Ruby on Rails: the good parts
+            Ruby on Rails: The Good Parts
           %h4
             .live
               Live:
-              %a{ href: 'is.gd/derwiki_git' }
+              %a{ href: 'is.gd/derwiki_rails' }
                 is.gd/derwiki_rails
             .source
               Source:
@@ -100,16 +100,6 @@
               terse way to query the database
             %li.fragment
               Incorporates many best practices out-of-the-box
-
-        %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-              At RailsConf 2015, DHH (Rails creator) likened Rails to a
-              survival kit for the Zombie apocolypse
-            %li.fragment
-              A little bit of everything, B/B+ quality -- use what you need
-            %li.fragment
 
         %section
           %h3.ms rails new PerfMon
@@ -271,7 +261,7 @@
             .ms end
 
         %section
-          %h3 Routing
+          %h3 Enumerating routes
           .fragment
             .ms.b $ rake routes
             %table.sm
@@ -478,7 +468,7 @@
         %section
           %h3 Pushing to Heroku
           .fragment.sm
-            .ms $ git push heroku master
+            .ms.b $ git push heroku master
             .ms Counting objects: 90, done.
             .ms Delta compression using up to 4 threads.
             .ms Compressing objects: 100% (82/82), done.
@@ -631,59 +621,197 @@
           %img.stretch{ src: 'assets/snapshots-chart.jpg' }
 
         %section
-          %h3 Survival Kit
+          %h3 Asset pipeline
           %ul
             %li.fragment
+              Framework for dealing with static assets (CSS, JS, images)
             %li.fragment
+              Concatenation and minification out-of-the-box
             %li.fragment
+              Fingerprinting, e.g.
+              %span.ms global-908e25f4bf641868d8683022a5b62f54.css
+            %li.fragment
+              Advantage over time-based (index.css?1430782463): only bust cache
+              when contents change
+            %li.fragment
+              Adds level of pre-processing, e.g.
+              %span.ms index.html.haml
+              or
+              %span.ms index.css.scss.erb
+
 
         %section
-          %h3 Survival Kit
+          %h3 ActiveRecord
           %ul
             %li.fragment
+              Object Relational Mapper
             %li.fragment
+              Layer responsible for business data and logic
             %li.fragment
+              Support for associations via foreign key, inheritance, validation
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 ActiveRecord: (C)RUD
+          .fragment
+            .ms user = User.create!(name: "David",
+            .ms &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; occupation: "Code Artist")
+            or
+            .ms user = User.new
+            .ms user.name = "David"
+            .ms user.occupation = "Code Artist"
+            .ms user.save!
 
         %section
-          %h3 Survival Kit
-          %ul
-            %li.fragment
-            %li.fragment
-            %li.fragment
+          %h3 ActiveRecord: C(R)UD
+          .fragment
+            .ms users = User.where(occupation: "Code Artist")
+            .ms &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .order('id DESC')
+            .ms user = User.where(occupation: "Code Artist")
+            .ms &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; .first
+            .ms user = User.find_by_email('user@example.com')
+            .ms user = User.find(1)
 
         %section
-          %h3 Survival Kit
+          %h3 ActiveRecord: CR(U)D
+          .fragment
+            .ms user = User.find(1)
+            .ms user.name = 'David'
+            .ms user.save!
+            or
+            .ms user.update_attributes(name: 'David')
+            or
+            .ms User.where(occupation: 'Code Artist')
+            .ms &nbsp; &nbsp; .update_all(occupation: 'Coder')
+    
+
+        %section
+          %h3 ActiveRecord: CRU(D)
+          .fragment
+            .ms User.find(1).destroy # triggers callbacks
+            .ms User.find(1).delete # just deletes records
+            .ms User.where(occupation: 'Code Artist')
+            .ms &nbsp; &nbsp; .delete_all
+
+        %section
+          %h3 ActiveRecord: Single Table Inheritance
+          %ul
+            %li.fragment.ms class MonopolyProperty &lt; ActiveRecord::Base
+            %li.fragment.ms class House &lt; MonopolyProperty  
+            %li.fragment.ms class Hotel &lt; MonopolyProperty  
+            %li.fragment Uses `type` column
+            %li.fragment.ms MonopolyProperty.where(type: 'house')
+            %li.fragment.ms House.find(1)
+            %li.fragment.ms # raises exception if 1 is a Hotel
+
+        %section
+          %h3 ActiveRecord: Associations
+          %ul.sm
+            %li.fragment
+              .ms class User &lt; ActiveRecord::Base
+              .ms &nbsp; has_one :email
+              .ms &nbsp; # indicates `emails` table has `user_id`
+              .ms &nbsp; belongs_to :email 
+              .ms &nbsp; # indicates this table has `email_id`
+              .ms end
+            %li.fragment.ms User.find(1).email.address
+            %li.fragment
+              .ms User.where(occupation: 'Coder').each do |user|
+              .ms &nbsp; puts user.email.address
+              .ms end
+            %li.fragment N-query; each iteration hits `emails` table
+            %li.fragment.ms Fix: User.includes(:email).where(occupation: 'Coder')
+            %li.fragment Collects all `id`s that match `where` and use them to select against `emails` eagerly
+            %li.fragment By default does not use join strategy
+
+        %section
+          %h3 N-query gem
+          %ul
+            %li.fragment github.com/flyerhzm/bullet
+            %li.fragment
+              .ms gem install bullet
+            %li.fragment
+              .ms config.after_initialize do
+              .ms &nbsp; Bullet.enable = true
+              .ms &nbsp; Bullet.alert = true
+              .ms &nbsp; Bullet.console = true
+              .ms end
+            %li.fragment
+              Available since 2009
+        %section
+          %h3 ActiveRecord: Scopes
+          %ul.sm
+            %li.fragment
+              .ms class User &lt; ActiveRecord::Base
+              .ms &nbsp; scope :active, -&gt;{ where 'confirmed_at IS NOT NULL' } 
+              .ms &nbsp; scope :two_weeks, -&gt;{ where 'created_at &lt; ?', 2.weeks.ago } 
+              .ms end
+              .ms User.active.two_weeks.count
+
+        %section
+          %h3 Template Caching
           %ul
             %li.fragment
+              .ms - @users.each do |user|
+              .ms &nbsp; cache(user) do
+              .ms &nbsp; &nbsp; %h2= user.name
+              .ms &nbsp; &nbsp; %h2= user.email
             %li.fragment
+              .ms - cache('home') do
+              .ms &nbsp; %h1 Welcome to Rails
+
+        %section
+          %h3 Action Caching
+          %ul
+            %li.fragment.sm
+              .ms class UsersController &lt; ApplicationController
+              .ms &nbsp; caches_action :show,
+              .ms &nbsp; &nbsp; &nbsp; &nbsp; layout: true,
+              .ms &nbsp; &nbsp; &nbsp; &nbsp; cache_path: Proc.new { |c|
+              .ms &nbsp; &nbsp; { id: c.params[:user_id],
+              .ms &nbsp; &nbsp; &nbsp; &nbsp; is_owner: c.params[:user_id] == current_user.id
+              .ms &nbsp; &nbsp; } }
             %li.fragment
+              Action Caching cache hits serve in ~.1ms
+            %li.fragment
+              Good caching strategies (efficient keys, pre-emptive caching) can
+              drastically improve the performance of a web site
+            %li.fragment
+              Biggest benefit if layout is cacheable; harder for logged-in
+              users (AJAX user-tailored data strategy)
+
+        %section
+          %h3 Action Caching in Action
+          %img.stretch{ src: 'assets/action-caching-web-histogram.jpg' }
+
+        %section
+          %h3 Why Rails?
+          %ul
+            %li.fragment
+              Ship faster
+            %li.fragment
+              Ship more
+            %li.fragment
+              Re-invent less wheels
+            %li.fragment
+              Well-known vs other web frameworks
 
         %section
           %h2
-            Using
-            %span.ms git
-            effectively
+            Ruby on Rails: The Good Parts
           %h4
             .live
               Live:
-              %a{ href: 'is.gd/derwiki_git' }
-                is.gd/derwiki_git
+              %a{ href: 'is.gd/derwiki_rails' }
+                is.gd/derwiki_rails
             .source
               Source:
               %a{ href: '//github.com/derwiki/presentation-git' }
-                github.com/derwiki/presentation-git
+                github.com/derwiki/presentation-rails
           %br
           %h5 presented by
           %h4 @derwiki
           %h4
-          %h4 for AdRoll, March 31, 2015
+          %h4 for AdRoll, May 5, 2015
 
       /
         required for correct operation of reveal.js,

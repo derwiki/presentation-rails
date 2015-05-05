@@ -1,10 +1,10 @@
-Presentation on using git effectively in a team environment
+Presentation on Ruby on Rails: The Good Parts
 
 Presented by Adam Derewecki (derewecki@gmail.com):
-  - 2015/3/31 AdRoll
+  - 2015/5/5 AdRoll
 
 Live viewable version available at:
-  - http://is.gd/derwiki_git
+  - http://is.gd/derwiki_rails
 
 ## Includes:
 

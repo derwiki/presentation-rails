@@ -2,7 +2,7 @@
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
-    <title>Using git effectively | Adam Derewecki</title>
+    <title>Ruby on Rails: The Good Parts | Adam Derewecki</title>
     <meta content='Adam Derewecki' name='author' />
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css' />
     <link href='reveal/css/reset.css' rel='stylesheet' />
@@ -15,12 +15,12 @@
       <div class='slides'>
         <section>
           <h2>
-            Ruby on Rails: the good parts
+            Ruby on Rails: The Good Parts
           </h2>
           <h4>
             <div class='live'>
               Live:
-              <a href='is.gd/derwiki_git'>
+              <a href='is.gd/derwiki_rails'>
                 is.gd/derwiki_rails
               </a>
             </div>
@@ -131,19 +131,6 @@
             <li class='fragment'>
               Incorporates many best practices out-of-the-box
             </li>
-          </ul>
-        </section>
-        <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'>
-              At RailsConf 2015, DHH (Rails creator) likened Rails to a
-              survival kit for the Zombie apocolypse
-            </li>
-            <li class='fragment'>
-              A little bit of everything, B/B+ quality -- use what you need
-            </li>
-            <li class='fragment'></li>
           </ul>
         </section>
         <section>
@@ -320,7 +307,7 @@
           </div>
         </section>
         <section>
-          <h3>Routing</h3>
+          <h3>Enumerating routes</h3>
           <div class='fragment'>
             <div class='ms b'>$ rake routes</div>
             <table class='sm'>
@@ -549,7 +536,7 @@
         <section>
           <h3>Pushing to Heroku</h3>
           <div class='fragment sm'>
-            <div class='ms'>$ git push heroku master</div>
+            <div class='ms b'>$ git push heroku master</div>
             <div class='ms'>Counting objects: 90, done.</div>
             <div class='ms'>Delta compression using up to 4 threads.</div>
             <div class='ms'>Compressing objects: 100% (82/82), done.</div>
@@ -708,62 +695,231 @@
           <img class='stretch' src='assets/snapshots-chart.jpg' />
         </section>
         <section>
-          <h3>Survival Kit</h3>
+          <h3>Asset pipeline</h3>
           <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
+            <li class='fragment'>
+              Framework for dealing with static assets (CSS, JS, images)
+            </li>
+            <li class='fragment'>
+              Concatenation and minification out-of-the-box
+            </li>
+            <li class='fragment'>
+              Fingerprinting, e.g.
+              <span class='ms'>global-908e25f4bf641868d8683022a5b62f54.css</span>
+            </li>
+            <li class='fragment'>
+              Advantage over time-based (index.css?1430782463): only bust cache
+              when contents change
+            </li>
+            <li class='fragment'>
+              Adds level of pre-processing, e.g.
+              <span class='ms'>index.html.haml</span>
+              or
+              <span class='ms'>index.css.scss.erb</span>
+            </li>
           </ul>
         </section>
         <section>
-          <h3>Survival Kit</h3>
+          <h3>ActiveRecord</h3>
           <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
+            <li class='fragment'>
+              Object Relational Mapper
+            </li>
+            <li class='fragment'>
+              Layer responsible for business data and logic
+            </li>
+            <li class='fragment'>
+              Support for associations via foreign key, inheritance, validation
+            </li>
           </ul>
         </section>
         <section>
-          <h3>Survival Kit</h3>
+          <h3>ActiveRecord: (C)RUD</h3>
+          <div class='fragment'>
+            <div class='ms'>user = User.create!(name: "David",</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; occupation: "Code Artist")</div>
+            or
+            <div class='ms'>user = User.new</div>
+            <div class='ms'>user.name = "David"</div>
+            <div class='ms'>user.occupation = "Code Artist"</div>
+            <div class='ms'>user.save!</div>
+          </div>
+        </section>
+        <section>
+          <h3>ActiveRecord: C(R)UD</h3>
+          <div class='fragment'>
+            <div class='ms'>users = User.where(occupation: "Code Artist")</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .order('id DESC')</div>
+            <div class='ms'>user = User.where(occupation: "Code Artist")</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; .first</div>
+            <div class='ms'>user = User.find_by_email('user@example.com')</div>
+            <div class='ms'>user = User.find(1)</div>
+          </div>
+        </section>
+        <section>
+          <h3>ActiveRecord: CR(U)D</h3>
+          <div class='fragment'>
+            <div class='ms'>user = User.find(1)</div>
+            <div class='ms'>user.name = 'David'</div>
+            <div class='ms'>user.save!</div>
+            or
+            <div class='ms'>user.update_attributes(name: 'David')</div>
+            or
+            <div class='ms'>User.where(occupation: 'Code Artist')</div>
+            <div class='ms'>&nbsp; &nbsp; .update_all(occupation: 'Coder')</div>
+          </div>
+        </section>
+        <section>
+          <h3>ActiveRecord: CRU(D)</h3>
+          <div class='fragment'>
+            <div class='ms'>User.find(1).destroy # triggers callbacks</div>
+            <div class='ms'>User.find(1).delete # just deletes records</div>
+            <div class='ms'>User.where(occupation: 'Code Artist')</div>
+            <div class='ms'>&nbsp; &nbsp; .delete_all</div>
+          </div>
+        </section>
+        <section>
+          <h3>ActiveRecord: Single Table Inheritance</h3>
           <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
+            <li class='fragment ms'>class MonopolyProperty &lt; ActiveRecord::Base</li>
+            <li class='fragment ms'>class House &lt; MonopolyProperty</li>
+            <li class='fragment ms'>class Hotel &lt; MonopolyProperty</li>
+            <li class='fragment'>Uses `type` column</li>
+            <li class='fragment ms'>MonopolyProperty.where(type: 'house')</li>
+            <li class='fragment ms'>House.find(1)</li>
+            <li class='fragment ms'># raises exception if 1 is a Hotel</li>
           </ul>
         </section>
         <section>
-          <h3>Survival Kit</h3>
-          <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
+          <h3>ActiveRecord: Associations</h3>
+          <ul class='sm'>
+            <li class='fragment'>
+              <div class='ms'>class User &lt; ActiveRecord::Base</div>
+              <div class='ms'>&nbsp; has_one :email</div>
+              <div class='ms'>&nbsp; # indicates `emails` table has `user_id`</div>
+              <div class='ms'>&nbsp; belongs_to :email</div>
+              <div class='ms'>&nbsp; # indicates this table has `email_id`</div>
+              <div class='ms'>end</div>
+            </li>
+            <li class='fragment ms'>User.find(1).email.address</li>
+            <li class='fragment'>
+              <div class='ms'>User.where(occupation: 'Coder').each do |user|</div>
+              <div class='ms'>&nbsp; puts user.email.address</div>
+              <div class='ms'>end</div>
+            </li>
+            <li class='fragment'>N-query; each iteration hits `emails` table</li>
+            <li class='fragment ms'>Fix: User.includes(:email).where(occupation: 'Coder')</li>
+            <li class='fragment'>Collects all `id`s that match `where` and use them to select against `emails` eagerly</li>
+            <li class='fragment'>By default does not use join strategy</li>
           </ul>
         </section>
         <section>
-          <h3>Survival Kit</h3>
+          <h3>N-query gem</h3>
           <ul>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
-            <li class='fragment'></li>
+            <li class='fragment'>github.com/flyerhzm/bullet</li>
+            <li class='fragment'>
+              <div class='ms'>gem install bullet</div>
+            </li>
+            <li class='fragment'>
+              <div class='ms'>config.after_initialize do</div>
+              <div class='ms'>&nbsp; Bullet.enable = true</div>
+              <div class='ms'>&nbsp; Bullet.alert = true</div>
+              <div class='ms'>&nbsp; Bullet.console = true</div>
+              <div class='ms'>end</div>
+            </li>
+            <li class='fragment'>
+              Available since 2009
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>ActiveRecord: Scopes</h3>
+          <ul class='sm'>
+            <li class='fragment'>
+              <div class='ms'>class User &lt; ActiveRecord::Base</div>
+              <div class='ms'>&nbsp; scope :active, -&gt;{ where 'confirmed_at IS NOT NULL' }</div>
+              <div class='ms'>&nbsp; scope :two_weeks, -&gt;{ where 'created_at &lt; ?', 2.weeks.ago }</div>
+              <div class='ms'>end</div>
+              <div class='ms'>User.active.two_weeks.count</div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Template Caching</h3>
+          <ul>
+            <li class='fragment'>
+              <div class='ms'>- @users.each do |user|</div>
+              <div class='ms'>&nbsp; cache(user) do</div>
+              <div class='ms'>&nbsp; &nbsp; %h2= user.name</div>
+              <div class='ms'>&nbsp; &nbsp; %h2= user.email</div>
+            </li>
+            <li class='fragment'>
+              <div class='ms'>- cache('home') do</div>
+              <div class='ms'>&nbsp; %h1 Welcome to Rails</div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Action Caching</h3>
+          <ul>
+            <li class='fragment sm'>
+              <div class='ms'>class UsersController &lt; ApplicationController</div>
+              <div class='ms'>&nbsp; caches_action :show,</div>
+              <div class='ms'>&nbsp; &nbsp; &nbsp; &nbsp; layout: true,</div>
+              <div class='ms'>&nbsp; &nbsp; &nbsp; &nbsp; cache_path: Proc.new { |c|</div>
+              <div class='ms'>&nbsp; &nbsp; { id: c.params[:user_id],</div>
+              <div class='ms'>&nbsp; &nbsp; &nbsp; &nbsp; is_owner: c.params[:user_id] == current_user.id</div>
+              <div class='ms'>&nbsp; &nbsp; } }</div>
+            </li>
+            <li class='fragment'>
+              Action Caching cache hits serve in ~.1ms
+            </li>
+            <li class='fragment'>
+              Good caching strategies (efficient keys, pre-emptive caching) can
+              drastically improve the performance of a web site
+            </li>
+            <li class='fragment'>
+              Biggest benefit if layout is cacheable; harder for logged-in
+              users (AJAX user-tailored data strategy)
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Action Caching in Action</h3>
+          <img class='stretch' src='assets/action-caching-web-histogram.jpg' />
+        </section>
+        <section>
+          <h3>Why Rails?</h3>
+          <ul>
+            <li class='fragment'>
+              Ship faster
+            </li>
+            <li class='fragment'>
+              Ship more
+            </li>
+            <li class='fragment'>
+              Re-invent less wheels
+            </li>
+            <li class='fragment'>
+              Well-known vs other web frameworks
+            </li>
           </ul>
         </section>
         <section>
           <h2>
-            Using
-            <span class='ms'>git</span>
-            effectively
+            Ruby on Rails: The Good Parts
           </h2>
           <h4>
             <div class='live'>
               Live:
-              <a href='is.gd/derwiki_git'>
-                is.gd/derwiki_git
+              <a href='is.gd/derwiki_rails'>
+                is.gd/derwiki_rails
               </a>
             </div>
             <div class='source'>
               Source:
               <a href='//github.com/derwiki/presentation-git'>
-                github.com/derwiki/presentation-git
+                github.com/derwiki/presentation-rails
               </a>
             </div>
           </h4>
@@ -771,7 +927,7 @@
           <h5>presented by</h5>
           <h4>@derwiki</h4>
           <h4></h4>
-          <h4>for AdRoll, March 31, 2015</h4>
+          <h4>for AdRoll, May 5, 2015</h4>
         </section>
       </div>
       <!--
