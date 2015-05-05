@@ -249,6 +249,7 @@
             .ms 2.2.0 :001 &gt; Snapshot.all
             .ms &nbsp; Snapshot Load (1.6ms)  SELECT "snapshots".* FROM "snapshots"
             .ms =&gt; &lt;ActiveRecord::Relation []&gt;
+            %br
             .ms 2.2.0 :002 &gt; Snapshot
             .ms &nbsp; =&gt; Snapshot(id: integer, requests: integer, visual_complete: integer, created_at: datetime, updated_at: datetime)
 
@@ -315,21 +316,22 @@
           %h3 Controller
           .fragment.sm
             .ms class SnapshotsController &lt; ApplicationController
-            .ms   before_action :set_snapshot, only: %i[show edit update destroy]
+            .ms &nbsp; before_action :set_snapshot,
+            .ms &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; only: %i[show edit update destroy]
             %br
-            .ms   def index # GET /snapshots
-            .ms     @snapshots = Snapshot.all
-            .ms   end
+            .ms &nbsp; def index # GET /snapshots
+            .ms &nbsp; &nbsp; @snapshots = Snapshot.all
+            .ms &nbsp; end
             %br
-            .ms   def show # GET /snapshots/1
-            .ms   end
+            .ms &nbsp; def show # GET /snapshots/1
+            .ms &nbsp; end
             %br
-            .ms   def new # GET /snapshots/new
-            .ms     @snapshot = Snapshot.new
-            .ms   end
+            .ms &nbsp; def new # GET /snapshots/new
+            .ms &nbsp; &nbsp; @snapshot = Snapshot.new
+            .ms &nbsp; end
             %br
-            .ms   def edit # GET /snapshots/1/edit
-            .ms   end
+            .ms &nbsp; def edit # GET /snapshots/1/edit
+            .ms &nbsp; end
 
         %section
           %h3 Controller
@@ -432,6 +434,7 @@
           .fragment
             .ms.b $ rails g task web_page_test run
             .ms &nbsp; &nbsp; &nbsp;create &nbsp;lib/tasks/web_page_test.rake
+            %br
             .ms.b $ cat lib/tasks/web_page_test.rake
             .ms namespace :web_page_test do
             .ms &nbsp; desc "TODO"
@@ -461,6 +464,7 @@
             .ms Creating perf-mon-example... done, stack is cedar-14
             .ms https://perf-mon-example.herokuapp.com/ | https://git.heroku.com/perf-mon-example.git
             .ms Git remote heroku added
+            %br
             .ms.b $ git remote -v
             .ms heroku  https://git.heroku.com/perf-mon-example.git (fetch)
             .ms heroku  https://git.heroku.com/perf-mon-example.git (push)
@@ -602,6 +606,8 @@
         %section
           %h3 line_chart gem
           .fragment.sm
+            .ms = line_chart [{ name: 'Visually Complete', data: @chart }]
+          .fragment.sm
             .ms timedata = {}
             .ms @snapshots = Snapshot.order('id DESC').to_a.each do |ps|
             .ms &nbsp;  key = ps.created_at.strftime('%Y%m%d')
@@ -614,7 +620,6 @@
             .ms &nbsp;  average = values.inject(:+).to_f / values.size
             .ms &nbsp;  @chart &lt;&lt; [Time.parse(hour_time_key), average]
             .ms end
-            .ms = line_chart [{ name: 'Visually Complete', data: @chart }]
 
         %section
           %h3.ms line_chart gem
@@ -635,8 +640,6 @@
               when contents change
             %li.fragment
               Adds level of pre-processing, e.g.
-              %span.ms index.html.haml
-              or
               %span.ms index.css.scss.erb
 
 
@@ -750,11 +753,14 @@
         %section
           %h3 Template Caching
           %ul
+            %li.fragment Russian doll caching
+            %li.fragment e.g. Member directory by city
             %li.fragment
-              .ms - @users.each do |user|
-              .ms &nbsp; cache(user) do
-              .ms &nbsp; &nbsp; %h2= user.name
-              .ms &nbsp; &nbsp; %h2= user.email
+              .ms cache(['city', city.id]) do
+              .ms &nbsp; - @users.each do |user|
+              .ms &nbsp; &nbsp; - cache(['city_user', user.id]) do
+              .ms &nbsp; &nbsp; &nbsp; %h2= user.name
+              .ms &nbsp; &nbsp; &nbsp; %h2= user.email
             %li.fragment
               .ms - cache('home') do
               .ms &nbsp; %h1 Welcome to Rails

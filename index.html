@@ -293,6 +293,7 @@
             <div class='ms'>2.2.0 :001 &gt; Snapshot.all</div>
             <div class='ms'>&nbsp; Snapshot Load (1.6ms)  SELECT "snapshots".* FROM "snapshots"</div>
             <div class='ms'>=&gt; &lt;ActiveRecord::Relation []&gt;</div>
+            <br />
             <div class='ms'>2.2.0 :002 &gt; Snapshot</div>
             <div class='ms'>&nbsp; =&gt; Snapshot(id: integer, requests: integer, visual_complete: integer, created_at: datetime, updated_at: datetime)</div>
           </div>
@@ -372,21 +373,22 @@
           <h3>Controller</h3>
           <div class='fragment sm'>
             <div class='ms'>class SnapshotsController &lt; ApplicationController</div>
-            <div class='ms'>before_action :set_snapshot, only: %i[show edit update destroy]</div>
+            <div class='ms'>&nbsp; before_action :set_snapshot,</div>
+            <div class='ms'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; only: %i[show edit update destroy]</div>
             <br />
-            <div class='ms'>def index # GET /snapshots</div>
-            <div class='ms'>@snapshots = Snapshot.all</div>
-            <div class='ms'>end</div>
+            <div class='ms'>&nbsp; def index # GET /snapshots</div>
+            <div class='ms'>&nbsp; &nbsp; @snapshots = Snapshot.all</div>
+            <div class='ms'>&nbsp; end</div>
             <br />
-            <div class='ms'>def show # GET /snapshots/1</div>
-            <div class='ms'>end</div>
+            <div class='ms'>&nbsp; def show # GET /snapshots/1</div>
+            <div class='ms'>&nbsp; end</div>
             <br />
-            <div class='ms'>def new # GET /snapshots/new</div>
-            <div class='ms'>@snapshot = Snapshot.new</div>
-            <div class='ms'>end</div>
+            <div class='ms'>&nbsp; def new # GET /snapshots/new</div>
+            <div class='ms'>&nbsp; &nbsp; @snapshot = Snapshot.new</div>
+            <div class='ms'>&nbsp; end</div>
             <br />
-            <div class='ms'>def edit # GET /snapshots/1/edit</div>
-            <div class='ms'>end</div>
+            <div class='ms'>&nbsp; def edit # GET /snapshots/1/edit</div>
+            <div class='ms'>&nbsp; end</div>
           </div>
         </section>
         <section>
@@ -497,6 +499,7 @@
           <div class='fragment'>
             <div class='ms b'>$ rails g task web_page_test run</div>
             <div class='ms'>&nbsp; &nbsp; &nbsp;create &nbsp;lib/tasks/web_page_test.rake</div>
+            <br />
             <div class='ms b'>$ cat lib/tasks/web_page_test.rake</div>
             <div class='ms'>namespace :web_page_test do</div>
             <div class='ms'>&nbsp; desc "TODO"</div>
@@ -528,6 +531,7 @@
             <div class='ms'>Creating perf-mon-example... done, stack is cedar-14</div>
             <div class='ms'>https://perf-mon-example.herokuapp.com/ | https://git.heroku.com/perf-mon-example.git</div>
             <div class='ms'>Git remote heroku added</div>
+            <br />
             <div class='ms b'>$ git remote -v</div>
             <div class='ms'>heroku  https://git.heroku.com/perf-mon-example.git (fetch)</div>
             <div class='ms'>heroku  https://git.heroku.com/perf-mon-example.git (push)</div>
@@ -675,6 +679,9 @@
         <section>
           <h3>line_chart gem</h3>
           <div class='fragment sm'>
+            <div class='ms'>= line_chart [{ name: 'Visually Complete', data: @chart }]</div>
+          </div>
+          <div class='fragment sm'>
             <div class='ms'>timedata = {}</div>
             <div class='ms'>@snapshots = Snapshot.order('id DESC').to_a.each do |ps|</div>
             <div class='ms'>&nbsp;  key = ps.created_at.strftime('%Y%m%d')</div>
@@ -687,7 +694,6 @@
             <div class='ms'>&nbsp;  average = values.inject(:+).to_f / values.size</div>
             <div class='ms'>&nbsp;  @chart &lt;&lt; [Time.parse(hour_time_key), average]</div>
             <div class='ms'>end</div>
-            <div class='ms'>= line_chart [{ name: 'Visually Complete', data: @chart }]</div>
           </div>
         </section>
         <section>
@@ -713,8 +719,6 @@
             </li>
             <li class='fragment'>
               Adds level of pre-processing, e.g.
-              <span class='ms'>index.html.haml</span>
-              or
               <span class='ms'>index.css.scss.erb</span>
             </li>
           </ul>
@@ -847,11 +851,14 @@
         <section>
           <h3>Template Caching</h3>
           <ul>
+            <li class='fragment'>Russian doll caching</li>
+            <li class='fragment'>e.g. Member directory by city</li>
             <li class='fragment'>
-              <div class='ms'>- @users.each do |user|</div>
-              <div class='ms'>&nbsp; cache(user) do</div>
-              <div class='ms'>&nbsp; &nbsp; %h2= user.name</div>
-              <div class='ms'>&nbsp; &nbsp; %h2= user.email</div>
+              <div class='ms'>cache(['city', city.id]) do</div>
+              <div class='ms'>&nbsp; - @users.each do |user|</div>
+              <div class='ms'>&nbsp; &nbsp; - cache(['city_user', user.id]) do</div>
+              <div class='ms'>&nbsp; &nbsp; &nbsp; %h2= user.name</div>
+              <div class='ms'>&nbsp; &nbsp; &nbsp; %h2= user.email</div>
             </li>
             <li class='fragment'>
               <div class='ms'>- cache('home') do</div>
